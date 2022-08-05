@@ -8,7 +8,7 @@ class Image():
     Class for...
     """
 
-    def __init__(self, rotation=180, resolution=(2592, 1944)):
+    def __init__(self, rotation=0, resolution=(2592, 1944)):
         """
         The constructor for XCam class.
         Arguments:

@@ -9,7 +9,7 @@ class Video():
     Class for...
     """
 
-    def __init__(self, rotation=180, resolution=(1920, 1080), frame_rate=15):
+    def __init__(self, rotation=0, resolution=(1920, 1080), frame_rate=15):
         """
         The constructor for XCam class.
         Arguments:
