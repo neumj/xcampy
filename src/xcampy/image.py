@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import os
-from xcampy.camera import XCam
+from picamera import PiCamera
 
-class Image(XCam):
+class Image():
     """
     Class for...
     """
 
-    def __init__(self):
+    def __init__(self, rotation=180, resolution=(2592, 1944)):
         """
         The constructor for XCam class.
         Arguments:
@@ -17,12 +17,18 @@ class Image(XCam):
             None.
         Tips:
         None.
-        """
-        self.camera = XCam()
+        """        
+        self.rotation = rotation
+        self.resolution = resolution
+        
 
     def take_an_image(self, output_path, file_name):
         output = output_path + os.sep + file_name
-        #self.camera.camera.start_preview(alpha=50)
-        #time.sleep(3)
-        self.camera.camera.capture(output)
-        #self.camera.camera.stop_preview()
+        try:
+            camera = PiCamera()
+            camera.rotation = self.rotation
+            camera.resolution = self.resolution
+            camera.capture(output)
+            pass
+        finally:
+            camera.close()

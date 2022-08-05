@@ -2,14 +2,14 @@
 # -*- coding: utf-8 -*-
 import os
 import time
-from xcampy.camera import XCam
+from picamera import PiCamera
 
-class Video(XCam):
+class Video():
     """
     Class for...
     """
 
-    def __init__(self):
+    def __init__(self, rotation=180, resolution=(1920, 1080), frame_rate=15):
         """
         The constructor for XCam class.
         Arguments:
@@ -19,11 +19,20 @@ class Video(XCam):
         Tips:
         None.
         """
-        self.camera = XCam()
+        self.rotation = rotation
+        self.resolution = resolution
+        self.frame_rate = frame_rate
 
     def take_a_video(self, recording_time, output_path, file_name):
         output = output_path + os.sep + file_name
-        self.camera.camera.resolution = (1920, 1080)
-        self.camera.camera.start_recording(output)
-        time.sleep(recording_time)
-        self.camera.camera.stop_recording()
+        try:
+            camera = PiCamera()
+            camera.rotation = self.rotation
+            camera.resolution = self.resolution
+            camera.framerate = self.frame_rate
+            camera.start_recording(output)
+            time.sleep(recording_time)
+            camera.stop_recording()
+            pass
+        finally:
+            camera.close()
